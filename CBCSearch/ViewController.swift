@@ -57,6 +57,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     //MARK: Parse Json
     
     func parseJSON(){
+        self.lineUpModelArray = []
         let baseUrl = "https://api-gw.radio-canada.ca/aggregate-content/v1/items?q="
         let query = self.searchTerm
         let requestURL: URL = URL(string: baseUrl + query)!
@@ -78,6 +79,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                                         if let publishedDate = article["publishedAt"] as? Int {
                                             var lineupItem = LineupItemModel(title: title)
                                             let date = NSDate(timeIntervalSince1970: TimeInterval(publishedDate))
+                                            lineupItem.date = date as Date
                                             let urlstring = picture
                                             let url = NSURL(string: urlstring)
                                             lineupItem.imageURL = url as URL?
