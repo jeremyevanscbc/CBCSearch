@@ -8,24 +8,27 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
     
     // MARK: Properties
     var lineUpModel: LineupModel!
     var lineUpModelArray:[LineupModel] = []
+    var searchTerm = ""
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     var searchController: UISearchController = UISearchController(searchResultsController: nil)
     
+    
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchController.searchBar.delegate = self
+//        searchController.searchBar.delegate = self
+        searchBar.delegate = self
         prepareLayout()
-        parseJSON()
+//        parseJSON()
     }
     
     
@@ -54,7 +57,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     //MARK: Parse Json
     
     func parseJSON(){
-        let requestURL: URL = URL(string: "https://api-gw.radio-canada.ca/aggregate-content/v1/items?q=trump&sortOrder=byRecency")!
+        let baseUrl = "https://api-gw.radio-canada.ca/aggregate-content/v1/items?q="
+        let query = self.searchTerm
+        let requestURL: URL = URL(string: baseUrl + query)!
         let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL)
         let session = URLSession.shared
         let task = session.dataTask(with: urlRequest as URLRequest) {
@@ -128,7 +133,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
 
+    
+    // MARK: SearchBar
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchTerm = (searchBar.text?.lowercased())!
+        parseJSON()
+        self.searchBar.endEditing(true)
+
+    }
+
+    
 
 
+
+    
 }
 
