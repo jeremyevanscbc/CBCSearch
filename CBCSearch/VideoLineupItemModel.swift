@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import LineupItemModel
 
 protocol VideoModel : LineupModel {
     var videoURL :URL { get set}
