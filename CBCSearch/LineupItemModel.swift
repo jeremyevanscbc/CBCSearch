@@ -32,10 +32,20 @@ public struct LineupItemModel : LineupModel {
         self.date = Date()
         self.flag = ""
     }
+   
     public init() {
         self.title = "No Title"
         self.date = Date()
         self.flag = "Breaking"
     }
+    
+    public init?(title:String, imageUrl: URL?, updatedDate:Date, flag : String) {
+        guard !title.isEmpty && !flag.isEmpty else {
+            return nil
+        }
+        self.title = title
+        self.imageURL = imageUrl
+        self.date = updatedDate
+        self.flag = flag
+    }
 }
-
