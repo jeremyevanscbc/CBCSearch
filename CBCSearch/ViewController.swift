@@ -15,20 +15,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var lineUpModel: LineupModel!
     var lineUpModelArray:[LineupModel] = []
     var searchTerm = ""
+    var searchMode = "ByRelevance"
+    var query = ""
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
-    var searchController: UISearchController = UISearchController(searchResultsController: nil)
-    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+
     
     // MARK: Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        searchController.searchBar.delegate = self
         searchBar.delegate = self
         prepareLayout()
-//        parseJSON()
     }
     
     
@@ -59,8 +59,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func parseJSON(){
         self.lineUpModelArray = []
         let baseUrl = "https://api-gw.radio-canada.ca/aggregate-content/v1/items?q="
-        let query = self.searchTerm
-        let encodedQuery = query.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)
+        
+        if self.searchMode == "ByRelevance" {
+            self.query = self.searchTerm
+        } else {
+            self.query = self.searchTerm + "&sortOrder=byRecency"
+        }
+        
+        let encodedQuery = self.query.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)
         let requestURL: URL = URL(string: baseUrl + encodedQuery!)!
         print(requestURL)
         let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL)
@@ -145,13 +151,27 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.searchTerm = (searchBar.text?.lowercased())!
         parseJSON()
         self.searchBar.endEditing(true)
-
     }
 
     
-
-
-
+    // MARK: Segmented Control
+    
+    @IBAction func handleSegmentedControl(_ sender: Any) {
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            self.searchMode = "ByRelevance"
+            parseJSON()
+        case 1:
+            self.searchMode = "ByDate"
+            parseJSON()
+        default:
+            break
+        }
+        
+    }
+    
+    
     
 }
 
