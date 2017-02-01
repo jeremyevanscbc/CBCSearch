@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UITableViewDataSource {
-
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+    
     
     // MARK: Properties
     var lineUpModel: LineupModel!
@@ -18,7 +18,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var searchMode = "ByRelevance"
     var query = ""
     var topStoryArray:[String] = []
-
+    
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -49,15 +49,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 if subview.isKind(of: UITextField.self) {
                     let textField: UITextField = subview as! UITextField
                     textField.backgroundColor = #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
-                        textField.textColor = UIColor.white
-                    }
+                    textField.textColor = UIColor.white
                 }
             }
         }
-  
-
+    }
     
-
+    
+    
     //MARK: Parse Json
     func parseJSONTopStory(){
         self.topStoryArray = []
@@ -92,8 +91,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         task.resume()
     }
-
-
+    
+    
+    
     func parseJSON(){
         self.lineUpModelArray = []
         let baseUrl = "https://api-gw.radio-canada.ca/aggregate-content/v1/items?q="
@@ -130,14 +130,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                                             let url = NSURL(string: urlstring)
                                             lineupItem.imageURL = url as URL?
                                             self.lineUpModelArray.append(lineupItem)
-                                            
                                         }
                                     }
                                 }
                             }
                         }
                     }
-                        DispatchQueue.main.async(execute: {
+                    DispatchQueue.main.async(execute: {
                         self.collectionView.reloadData()
                     })
                 }
@@ -149,9 +148,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         task.resume()
     }
-
     
-    // MARK: CollectionView 
+    
+    // MARK: CollectionView
     
     // Cell size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -159,11 +158,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     // Datasource
-
+    
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.lineUpModelArray.count
     }
-
+    
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchCell", for: indexPath) as! SearchCollectionViewCell
@@ -181,19 +180,31 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return cell
     }
     
-
+    
     // MARK: TableView
-
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return topStoryArray.count
     }
+    
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "topStoryCell") as! TopStoriesTableViewCell
         cell.topStoryLabel.text = topStoryArray[indexPath.row]
         return cell
     }
-
+    
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        let cell = self.tableView.cellForRow(at: indexPath) as! TopStoriesTableViewCell!
+        self.searchTerm = (cell?.topStoryLabel.text)!
+        parseJSON()
+        self.searchBar.endEditing(true)
+        self.segmentedControl.isHidden = false
+        self.collectionView.isHidden = false
+        self.tableView.isHidden = true
+    }
+    
     
     // MARK: SearchBar
     
@@ -206,12 +217,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.tableView.isHidden = true
     }
     
+    
     public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.segmentedControl.isHidden = true
         self.collectionView.isHidden = true
         self.tableView.isHidden = false
     }
-
+    
     
     // MARK: Segmented Control
     
@@ -229,8 +241,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         
     }
-    
-    
     
 }
 
