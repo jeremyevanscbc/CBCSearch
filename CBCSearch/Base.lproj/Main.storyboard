@@ -29,6 +29,12 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="hSH-jV-h77"/>
                                 </connections>
                             </searchBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search returns no results" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJG-W1-Zde">
+                                <rect key="frame" x="91.5" y="323" width="192" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="At1-gm-AHF">
                                 <rect key="frame" x="0.0" y="112" width="375" height="555"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -148,12 +154,14 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="f69-sE-8sF" secondAttribute="bottom" id="6SS-kA-5nd"/>
                             <constraint firstItem="At1-gm-AHF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7HB-Cf-HCS"/>
                             <constraint firstItem="epj-gV-tRA" firstAttribute="top" secondItem="0dU-8W-cjT" secondAttribute="bottom" constant="10" id="Bot-c7-mFY"/>
+                            <constraint firstItem="mJG-W1-Zde" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Chd-Qb-N8o"/>
                             <constraint firstItem="epj-gV-tRA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="L8X-eF-Qyu"/>
                             <constraint firstAttribute="trailing" secondItem="f69-sE-8sF" secondAttribute="trailing" id="LCg-wA-YbT"/>
                             <constraint firstAttribute="trailing" secondItem="At1-gm-AHF" secondAttribute="trailing" id="Ogd-ss-EZR"/>
                             <constraint firstItem="f69-sE-8sF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gXo-qq-rvh"/>
                             <constraint firstItem="At1-gm-AHF" firstAttribute="top" secondItem="epj-gV-tRA" secondAttribute="bottom" constant="10" id="kQh-yA-Zgb"/>
                             <constraint firstItem="0dU-8W-cjT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="owB-np-nNj"/>
+                            <constraint firstItem="mJG-W1-Zde" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="pHW-jr-2xb"/>
                             <constraint firstAttribute="trailing" secondItem="0dU-8W-cjT" secondAttribute="trailing" id="rd4-n8-6Sp"/>
                             <constraint firstItem="0dU-8W-cjT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="uqb-Cv-HbI"/>
                             <constraint firstItem="f69-sE-8sF" firstAttribute="top" secondItem="0dU-8W-cjT" secondAttribute="bottom" constant="10" id="vev-XY-YnL"/>
@@ -162,6 +170,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="At1-gm-AHF" id="68h-Dd-Pfe"/>
+                        <outlet property="noResultsLabel" destination="mJG-W1-Zde" id="eF7-qf-coY"/>
                         <outlet property="searchBar" destination="0dU-8W-cjT" id="Siv-lw-soY"/>
                         <outlet property="segmentedControl" destination="epj-gV-tRA" id="v7x-H9-wmH"/>
                         <outlet property="tableView" destination="f69-sE-8sF" id="OXn-S7-0xX"/>

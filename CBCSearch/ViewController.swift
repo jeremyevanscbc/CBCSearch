@@ -19,7 +19,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var query = ""
     var topStoryArray:[String] = []
     
-    
+    @IBOutlet weak var noResultsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -39,6 +39,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func prepareLayout(){
         self.segmentedControl.isHidden = true
+        self.noResultsLabel.isHidden = true
         searchBar.barTintColor = UIColor.red
         let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
         if statusBar.responds(to: #selector(setter: UIView.backgroundColor)) {
@@ -137,7 +138,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                         }
                     }
                     DispatchQueue.main.async(execute: {
-                        self.collectionView.reloadData()
+                        if self.lineUpModelArray.count == 0 {
+                            self.noResultsLabel.isHidden = false
+                            self.collectionView.isHidden = true
+                            self.segmentedControl.isHidden = true
+                        } else {
+                            self.noResultsLabel.isHidden = true
+                            self.collectionView.reloadData()
+                        }
                     })
                 }
                 catch {
@@ -174,9 +182,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let formattedDate = formatter.string(from: unformattedDate as Date)
         cell.timeLabel.text = String(describing: formattedDate)
         
-        cell.imageView.image = UIImage(data: try! Data(contentsOf: self.lineUpModelArray[indexPath.row].imageURL!))
+        let imageURL = self.lineUpModelArray[indexPath.row].imageURL
+        if imageURL != nil {
+            let imageData = NSData(contentsOf: self.lineUpModelArray[indexPath.row].imageURL!)
+            cell.imageView.image = UIImage(data: imageData as! Data)
+        }
+        else {
+            cell.imageView.image = UIImage(named: "placeholder")
+        }
         cell.titleLabel.text = self.lineUpModelArray[indexPath.row].title
-        
         return cell
     }
     
