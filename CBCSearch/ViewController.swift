@@ -60,7 +60,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.lineUpModelArray = []
         let baseUrl = "https://api-gw.radio-canada.ca/aggregate-content/v1/items?q="
         let query = self.searchTerm
-        let requestURL: URL = URL(string: baseUrl + query)!
+        let encodedQuery = query.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)
+        let requestURL: URL = URL(string: baseUrl + encodedQuery!)!
+        print(requestURL)
         let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL)
         let session = URLSession.shared
         let task = session.dataTask(with: urlRequest as URLRequest) {
@@ -76,14 +78,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                             if let title = article["title"] as? String {
                                 if let typeAttribute = article["typeAttributes"] as? [String:AnyObject] {
                                     if let picture = typeAttribute["imageSmall"] as? String {
-                                        if let publishedDate = article["publishedAt"] as? Int {
+                                        if let publishedDate = article["publishedAt"] as? Double {
                                             var lineupItem = LineupItemModel(title: title)
-                                            let date = NSDate(timeIntervalSince1970: TimeInterval(publishedDate))
+                                            let date = NSDate(timeIntervalSince1970: TimeInterval(publishedDate/1000))
                                             lineupItem.date = date as Date
                                             let urlstring = picture
                                             let url = NSURL(string: urlstring)
                                             lineupItem.imageURL = url as URL?
                                             self.lineUpModelArray.append(lineupItem)
+                                            
                                         }
                                     }
                                 }
