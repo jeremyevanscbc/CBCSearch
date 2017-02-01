@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UITableViewDataSource {
 
     
     // MARK: Properties
@@ -17,11 +17,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var searchTerm = ""
     var searchMode = "ByRelevance"
     var query = ""
+    var topStoryArray:[String] = []
 
+    
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
-
     
     // MARK: Life Cycle
     
@@ -29,12 +31,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         super.viewDidLoad()
         searchBar.delegate = self
         prepareLayout()
+        parseJSONTopStory()
     }
     
     
     //MARK: Prepare Layout
     
     func prepareLayout(){
+        self.segmentedControl.isHidden = true
         searchBar.barTintColor = UIColor.red
         let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
         if statusBar.responds(to: #selector(setter: UIView.backgroundColor)) {
@@ -55,7 +59,41 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
 
     //MARK: Parse Json
-    
+    func parseJSONTopStory(){
+        self.topStoryArray = []
+        let baseUrl = "https://api-gw-dev.radio-canada.ca/experimental-aggregate-content/v1/top-searches"
+        let requestURL: URL = URL(string: baseUrl)!
+        let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL)
+        let session = URLSession.shared
+        let task = session.dataTask(with: urlRequest as URLRequest) {
+            (data, response, error) -> Void in
+            let httpResponse = response as! HTTPURLResponse
+            let statusCode = httpResponse.statusCode
+            if (statusCode == 200) {
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+                    
+                    if let articles = json as? [[String: AnyObject]] {
+                        for article in articles {
+                            if let term = article["term"] as? String {
+                                self.topStoryArray.append(term)
+                            }
+                        }
+                    }
+                    DispatchQueue.main.async(execute: {
+                        self.tableView.reloadData()
+                    })
+                }
+                catch {
+                    print("error serializing JSON: \(error)")
+                }
+            }
+            print(self.topStoryArray)
+        }
+        task.resume()
+    }
+
+
     func parseJSON(){
         self.lineUpModelArray = []
         let baseUrl = "https://api-gw.radio-canada.ca/aggregate-content/v1/items?q="
@@ -144,6 +182,18 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
 
+    // MARK: TableView
+
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return topStoryArray.count
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "topStoryCell") as! TopStoriesTableViewCell
+        cell.topStoryLabel.text = topStoryArray[indexPath.row]
+        return cell
+    }
+
     
     // MARK: SearchBar
     
@@ -151,6 +201,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.searchTerm = (searchBar.text?.lowercased())!
         parseJSON()
         self.searchBar.endEditing(true)
+        self.segmentedControl.isHidden = false
+        self.collectionView.isHidden = false
+        self.tableView.isHidden = true
+    }
+    
+    public func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.segmentedControl.isHidden = true
+        self.collectionView.isHidden = true
+        self.tableView.isHidden = false
     }
 
     
