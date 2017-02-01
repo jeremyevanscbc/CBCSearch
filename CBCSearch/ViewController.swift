@@ -24,6 +24,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     
     // MARK: Life Cycle
     
@@ -40,6 +41,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func prepareLayout(){
         self.segmentedControl.isHidden = true
         self.noResultsLabel.isHidden = true
+        self.progressIndicator.isHidden = true
         searchBar.barTintColor = UIColor.red
         let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
         if statusBar.responds(to: #selector(setter: UIView.backgroundColor)) {
@@ -61,6 +63,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     //MARK: Parse Json
     func parseJSONTopStory(){
         self.topStoryArray = []
+        self.progressIndicator.isHidden = false
+        self.progressIndicator.startAnimating()
         let baseUrl = "https://api-gw-dev.radio-canada.ca/experimental-aggregate-content/v1/top-searches"
         let requestURL: URL = URL(string: baseUrl)!
         let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL)
@@ -81,6 +85,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                         }
                     }
                     DispatchQueue.main.async(execute: {
+                        self.progressIndicator.stopAnimating()
+                        self.progressIndicator.isHidden = true
                         self.tableView.reloadData()
                     })
                 }
@@ -97,6 +103,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func parseJSON(){
         self.lineUpModelArray = []
+        self.progressIndicator.isHidden = false
+        self.progressIndicator.startAnimating()
         let baseUrl = "https://api-gw.radio-canada.ca/aggregate-content/v1/items?q="
         
         if self.searchMode == "ByRelevance" {
@@ -142,9 +150,13 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                             self.noResultsLabel.isHidden = false
                             self.collectionView.isHidden = true
                             self.segmentedControl.isHidden = true
+                            self.progressIndicator.isHidden = true 
                         } else {
                             self.noResultsLabel.isHidden = true
+                            self.progressIndicator.stopAnimating()
+                            self.progressIndicator.isHidden = true
                             self.collectionView.reloadData()
+
                         }
                     })
                 }
@@ -185,7 +197,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let imageURL = self.lineUpModelArray[indexPath.row].imageURL
         if imageURL != nil {
             if let imageData = NSData(contentsOf: self.lineUpModelArray[indexPath.row].imageURL!) {
-                cell.imageView.image = UIImage(data: imageData as! Data)
+                cell.imageView.image = UIImage(data: imageData as Data)
             } else {
                 cell.imageView.image = UIImage(named: "placeholder")
             }

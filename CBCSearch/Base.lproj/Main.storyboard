@@ -29,6 +29,9 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="hSH-jV-h77"/>
                                 </connections>
                             </searchBar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="RDl-kM-FUf">
+                                <rect key="frame" x="0.0" y="323" width="375" height="20"/>
+                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search returns no results" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJG-W1-Zde">
                                 <rect key="frame" x="91.5" y="323" width="192" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -153,8 +156,10 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="At1-gm-AHF" secondAttribute="bottom" id="009-1O-iUf"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="f69-sE-8sF" secondAttribute="bottom" id="6SS-kA-5nd"/>
                             <constraint firstItem="At1-gm-AHF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="7HB-Cf-HCS"/>
+                            <constraint firstItem="RDl-kM-FUf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8r8-K0-saH"/>
                             <constraint firstItem="epj-gV-tRA" firstAttribute="top" secondItem="0dU-8W-cjT" secondAttribute="bottom" constant="10" id="Bot-c7-mFY"/>
                             <constraint firstItem="mJG-W1-Zde" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Chd-Qb-N8o"/>
+                            <constraint firstItem="RDl-kM-FUf" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Hc3-I0-SX0"/>
                             <constraint firstItem="epj-gV-tRA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="L8X-eF-Qyu"/>
                             <constraint firstAttribute="trailing" secondItem="f69-sE-8sF" secondAttribute="trailing" id="LCg-wA-YbT"/>
                             <constraint firstAttribute="trailing" secondItem="At1-gm-AHF" secondAttribute="trailing" id="Ogd-ss-EZR"/>
@@ -171,6 +176,7 @@
                     <connections>
                         <outlet property="collectionView" destination="At1-gm-AHF" id="68h-Dd-Pfe"/>
                         <outlet property="noResultsLabel" destination="mJG-W1-Zde" id="eF7-qf-coY"/>
+                        <outlet property="progressIndicator" destination="RDl-kM-FUf" id="97g-WL-c8D"/>
                         <outlet property="searchBar" destination="0dU-8W-cjT" id="Siv-lw-soY"/>
                         <outlet property="segmentedControl" destination="epj-gV-tRA" id="v7x-H9-wmH"/>
                         <outlet property="tableView" destination="f69-sE-8sF" id="OXn-S7-0xX"/>
