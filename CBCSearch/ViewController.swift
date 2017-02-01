@@ -184,8 +184,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         let imageURL = self.lineUpModelArray[indexPath.row].imageURL
         if imageURL != nil {
-            let imageData = NSData(contentsOf: self.lineUpModelArray[indexPath.row].imageURL!)
-            cell.imageView.image = UIImage(data: imageData as! Data)
+            if let imageData = NSData(contentsOf: self.lineUpModelArray[indexPath.row].imageURL!) {
+                cell.imageView.image = UIImage(data: imageData as! Data)
+            } else {
+                cell.imageView.image = UIImage(named: "placeholder")
+            }
         }
         else {
             cell.imageView.image = UIImage(named: "placeholder")
@@ -193,6 +196,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         cell.titleLabel.text = self.lineUpModelArray[indexPath.row].title
         return cell
     }
+    
     
     
     // MARK: TableView
