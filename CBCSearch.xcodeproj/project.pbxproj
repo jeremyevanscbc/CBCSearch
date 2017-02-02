@@ -16,7 +16,7 @@
 		3F6D766D1E40F3CA00FD8A73 /* CBCSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D766C1E40F3CA00FD8A73 /* CBCSearchTests.swift */; };
 		3F6D767D1E40F65F00FD8A73 /* LineupItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D767B1E40F65F00FD8A73 /* LineupItemModel.swift */; };
 		3F6D767E1E40F65F00FD8A73 /* VideoLineupItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D767C1E40F65F00FD8A73 /* VideoLineupItemModel.swift */; };
-		3F6D76831E40F9CB00FD8A73 /* LineupDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D76821E40F9CB00FD8A73 /* LineupDataDelegate.swift */; };
+		3F6D76831E40F9CB00FD8A73 /* LineupItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D76821E40F9CB00FD8A73 /* LineupItemViewModel.swift */; };
 		B4D567FFD71178E781451E83 /* Pods_CBCSearchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B85B6FB52CA1FABB10830CD /* Pods_CBCSearchTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +43,7 @@
 		3F6D766E1E40F3CA00FD8A73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F6D767B1E40F65F00FD8A73 /* LineupItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupItemModel.swift; sourceTree = "<group>"; };
 		3F6D767C1E40F65F00FD8A73 /* VideoLineupItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoLineupItemModel.swift; sourceTree = "<group>"; };
-		3F6D76821E40F9CB00FD8A73 /* LineupDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupDataDelegate.swift; sourceTree = "<group>"; };
+		3F6D76821E40F9CB00FD8A73 /* LineupItemViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupItemViewModel.swift; sourceTree = "<group>"; };
 		529E10031981E292E8EA917D /* Pods-CBCSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CBCSearch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CBCSearch/Pods-CBCSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		5B85B6FB52CA1FABB10830CD /* Pods_CBCSearchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CBCSearchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A879D5585389BFE6316DA0C /* Pods_CBCSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CBCSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,7 +147,7 @@
 		3F6D76801E40F93C00FD8A73 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
-				3F6D76821E40F9CB00FD8A73 /* LineupDataDelegate.swift */,
+				3F6D76821E40F9CB00FD8A73 /* LineupItemViewModel.swift */,
 			);
 			name = "View Model";
 			sourceTree = "<group>";
@@ -310,7 +310,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C43BB799B87E88F30A5ACB4E /* [CP] Embed Pods Frameworks */ = {
@@ -340,7 +340,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		FF095EEAEBE74A2D1FFBDD73 /* [CP] Copy Pods Resources */ = {
@@ -366,7 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F6D765A1E40F3CA00FD8A73 /* ViewController.swift in Sources */,
-				3F6D76831E40F9CB00FD8A73 /* LineupDataDelegate.swift in Sources */,
+				3F6D76831E40F9CB00FD8A73 /* LineupItemViewModel.swift in Sources */,
 				3F6D767E1E40F65F00FD8A73 /* VideoLineupItemModel.swift in Sources */,
 				3F6D76581E40F3CA00FD8A73 /* AppDelegate.swift in Sources */,
 				3F6D767D1E40F65F00FD8A73 /* LineupItemModel.swift in Sources */,
@@ -583,6 +583,7 @@
 				3F6D76731E40F3CA00FD8A73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F6D76741E40F3CA00FD8A73 /* Build configuration list for PBXNativeTarget "CBCSearchTests" */ = {
 			isa = XCConfigurationList;
@@ -591,6 +592,7 @@
 				3F6D76761E40F3CA00FD8A73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
