@@ -32,9 +32,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         super.viewDidLoad()
         searchBar.delegate = self
         prepareLayout()
-        parseJSONTopStory()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        parseJSONTopStory()
+    }
     
     //MARK: Prepare Layout
     
@@ -105,6 +107,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.lineUpModelArray = []
         self.progressIndicator.isHidden = false
         self.progressIndicator.startAnimating()
+        
         let baseUrl = "https://api-gw.radio-canada.ca/aggregate-content/v1/items?q="
         
         if self.searchMode == "ByRelevance" {
@@ -113,9 +116,31 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             self.query = self.searchTerm + "&sortOrder=byRecency"
         }
         
+
+        
         let encodedQuery = self.query.addingPercentEncoding(withAllowedCharacters:NSCharacterSet.urlQueryAllowed)
         let requestURL: URL = URL(string: baseUrl + encodedQuery!)!
         print(requestURL)
+        
+        //
+        let topStoryBaseUrl = "https://api-gw-dev.radio-canada.ca/experimental-aggregate-content/v1/items?q="
+        let topStoryrequestURL: URL = URL(string: topStoryBaseUrl + encodedQuery!)!
+        
+        
+        URLSession.shared.dataTask(with: topStoryrequestURL, completionHandler: {
+            (data, response, error) in
+            if(error != nil){
+                print("error")
+            }else{
+                do{
+                    print("call to top trending")
+                }catch let error as NSError{
+                    print(error)
+                }
+            }
+        }).resume()
+        //
+        
         let urlRequest: NSMutableURLRequest = NSMutableURLRequest(url: requestURL)
         let session = URLSession.shared
         let task = session.dataTask(with: urlRequest as URLRequest) {
@@ -253,6 +278,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.collectionView.isHidden = true
         self.tableView.isHidden = false
     }
+    
+    public func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        parseJSONTopStory()
+    }
+
     
     
     // MARK: Segmented Control
