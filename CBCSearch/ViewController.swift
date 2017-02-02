@@ -42,7 +42,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.segmentedControl.isHidden = true
         self.noResultsLabel.isHidden = true
         self.progressIndicator.isHidden = true
-        searchBar.barTintColor = UIColor.red
+        self.searchBar.barTintColor = UIColor.red
+        self.searchBar.placeholder = "Search"
         let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
         if statusBar.responds(to: #selector(setter: UIView.backgroundColor)) {
             statusBar.backgroundColor = UIColor.red
@@ -228,6 +229,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let cell = self.tableView.cellForRow(at: indexPath) as! TopStoriesTableViewCell!
         self.searchTerm = (cell?.topStoryLabel.text)!
+        self.searchBar.text = (cell?.topStoryLabel.text)!
         parseJSON()
         self.searchBar.endEditing(true)
         self.segmentedControl.isHidden = false
