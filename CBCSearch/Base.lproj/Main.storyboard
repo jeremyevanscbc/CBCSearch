@@ -29,8 +29,8 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="hSH-jV-h77"/>
                                 </connections>
                             </searchBar>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="RDl-kM-FUf">
-                                <rect key="frame" x="0.0" y="323" width="375" height="20"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="RDl-kM-FUf">
+                                <rect key="frame" x="177.5" y="323" width="20" height="20"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search returns no results" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJG-W1-Zde">
                                 <rect key="frame" x="91.5" y="323" width="192" height="20.5"/>

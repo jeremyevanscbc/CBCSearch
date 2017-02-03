@@ -41,6 +41,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func prepareLayout(){
         self.segmentedControl.isHidden = true
         self.noResultsLabel.isHidden = true
+        self.view.bringSubview(toFront: self.progressIndicator)
         self.progressIndicator.isHidden = true
         self.searchBar.barTintColor = UIColor.red
         self.searchBar.placeholder = "Search"
@@ -64,6 +65,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     //MARK: Parse Json
     func parseJSONTopStory(){
         self.topStoryArray = []
+        self.collectionView.isHidden = true
+        self.tableView.isHidden = true
+        self.noResultsLabel.isHidden = true
         self.progressIndicator.isHidden = false
         self.progressIndicator.startAnimating()
         let baseUrl = "https://api-gw-dev.radio-canada.ca/experimental-aggregate-content/v1/top-searches"
@@ -88,6 +92,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                     DispatchQueue.main.async(execute: {
                         self.progressIndicator.stopAnimating()
                         self.progressIndicator.isHidden = true
+                        self.tableView.isHidden = false
                         self.tableView.reloadData()
                     })
                 }
@@ -104,6 +109,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func parseJSON(){
         self.lineUpModelArray = []
+        self.collectionView.isHidden = true
+        self.tableView.isHidden = true
+        self.noResultsLabel.isHidden = true
         self.progressIndicator.isHidden = false
         self.progressIndicator.startAnimating()
         let baseUrl = "https://api-gw.radio-canada.ca/aggregate-content/v1/items?q="
@@ -147,17 +155,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                         }
                     }
                     DispatchQueue.main.async(execute: {
+                        self.progressIndicator.stopAnimating()
+                        self.progressIndicator.isHidden = true
+
                         if self.lineUpModelArray.count == 0 {
                             self.noResultsLabel.isHidden = false
                             self.collectionView.isHidden = true
                             self.segmentedControl.isHidden = true
-                            self.progressIndicator.isHidden = true 
                         } else {
                             self.noResultsLabel.isHidden = true
-                            self.progressIndicator.stopAnimating()
-                            self.progressIndicator.isHidden = true
+                            self.collectionView.isHidden = false
                             self.collectionView.reloadData()
-
                         }
                     })
                 }
@@ -233,7 +241,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         parseJSON()
         self.searchBar.endEditing(true)
         self.segmentedControl.isHidden = false
-        self.collectionView.isHidden = false
+        self.collectionView.isHidden = true
         self.tableView.isHidden = true
     }
     
@@ -245,7 +253,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         parseJSON()
         self.searchBar.endEditing(true)
         self.segmentedControl.isHidden = false
-        self.collectionView.isHidden = false
+        self.collectionView.isHidden = true
         self.tableView.isHidden = true
     }
     
