@@ -14,9 +14,13 @@
 		3F6D765F1E40F3CA00FD8A73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F6D765E1E40F3CA00FD8A73 /* Assets.xcassets */; };
 		3F6D76621E40F3CA00FD8A73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F6D76601E40F3CA00FD8A73 /* LaunchScreen.storyboard */; };
 		3F6D766D1E40F3CA00FD8A73 /* CBCSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D766C1E40F3CA00FD8A73 /* CBCSearchTests.swift */; };
-		3F6D767D1E40F65F00FD8A73 /* LineupItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D767B1E40F65F00FD8A73 /* LineupItemModel.swift */; };
+		3F6D767D1E40F65F00FD8A73 /* LineupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D767B1E40F65F00FD8A73 /* LineupModel.swift */; };
 		3F6D767E1E40F65F00FD8A73 /* VideoLineupItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D767C1E40F65F00FD8A73 /* VideoLineupItemModel.swift */; };
-		3F6D76831E40F9CB00FD8A73 /* LineupItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D76821E40F9CB00FD8A73 /* LineupItemViewModel.swift */; };
+		696BCB381E43AC8100D47DC9 /* LineupItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696BCB361E439A5C00D47DC9 /* LineupItemViewModel.swift */; };
+		696BCB391E43AC8D00D47DC9 /* LineupCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6D76821E40F9CB00FD8A73 /* LineupCollectionViewDelegate.swift */; };
+		696BCB3B1E43AEC400D47DC9 /* LineupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696BCB3A1E43AEC400D47DC9 /* LineupViewController.swift */; };
+		7C88DB0F1E41074A00BFE1ED /* SearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88DB0E1E41074A00BFE1ED /* SearchCollectionViewCell.swift */; };
+		7C88DB131E4259BC00BFE1ED /* TopStoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C88DB121E4259BC00BFE1ED /* TopStoriesTableViewCell.swift */; };
 		B4D567FFD71178E781451E83 /* Pods_CBCSearchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B85B6FB52CA1FABB10830CD /* Pods_CBCSearchTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,12 +45,16 @@
 		3F6D76681E40F3CA00FD8A73 /* CBCSearchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CBCSearchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F6D766C1E40F3CA00FD8A73 /* CBCSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBCSearchTests.swift; sourceTree = "<group>"; };
 		3F6D766E1E40F3CA00FD8A73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3F6D767B1E40F65F00FD8A73 /* LineupItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupItemModel.swift; sourceTree = "<group>"; };
+		3F6D767B1E40F65F00FD8A73 /* LineupModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupModel.swift; sourceTree = "<group>"; };
 		3F6D767C1E40F65F00FD8A73 /* VideoLineupItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoLineupItemModel.swift; sourceTree = "<group>"; };
-		3F6D76821E40F9CB00FD8A73 /* LineupItemViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupItemViewModel.swift; sourceTree = "<group>"; };
+		3F6D76821E40F9CB00FD8A73 /* LineupCollectionViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupCollectionViewDelegate.swift; sourceTree = "<group>"; };
 		529E10031981E292E8EA917D /* Pods-CBCSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CBCSearch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CBCSearch/Pods-CBCSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		5B85B6FB52CA1FABB10830CD /* Pods_CBCSearchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CBCSearchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		696BCB361E439A5C00D47DC9 /* LineupItemViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupItemViewModel.swift; sourceTree = "<group>"; };
+		696BCB3A1E43AEC400D47DC9 /* LineupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineupViewController.swift; sourceTree = "<group>"; };
 		7A879D5585389BFE6316DA0C /* Pods_CBCSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CBCSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C88DB0E1E41074A00BFE1ED /* SearchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		7C88DB121E4259BC00BFE1ED /* TopStoriesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopStoriesTableViewCell.swift; sourceTree = "<group>"; };
 		A194C4861936ED8C4B35FE41 /* Pods-CBCSearchTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CBCSearchTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CBCSearchTests/Pods-CBCSearchTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D0BC006195D7FD87B99C8739 /* Pods-CBCSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CBCSearch.release.xcconfig"; path = "Pods/Target Support Files/Pods-CBCSearch/Pods-CBCSearch.release.xcconfig"; sourceTree = "<group>"; };
 		FAE75EB349C628A2193C295A /* Pods-CBCSearchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CBCSearchTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CBCSearchTests/Pods-CBCSearchTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -140,6 +148,9 @@
 			isa = PBXGroup;
 			children = (
 				3F6D76591E40F3CA00FD8A73 /* ViewController.swift */,
+				696BCB3A1E43AEC400D47DC9 /* LineupViewController.swift */,
+				7C88DB0E1E41074A00BFE1ED /* SearchCollectionViewCell.swift */,
+				7C88DB121E4259BC00BFE1ED /* TopStoriesTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -147,7 +158,8 @@
 		3F6D76801E40F93C00FD8A73 /* View Model */ = {
 			isa = PBXGroup;
 			children = (
-				3F6D76821E40F9CB00FD8A73 /* LineupItemViewModel.swift */,
+				696BCB361E439A5C00D47DC9 /* LineupItemViewModel.swift */,
+				3F6D76821E40F9CB00FD8A73 /* LineupCollectionViewDelegate.swift */,
 			);
 			name = "View Model";
 			sourceTree = "<group>";
@@ -155,7 +167,7 @@
 		3F6D76811E40F94900FD8A73 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3F6D767B1E40F65F00FD8A73 /* LineupItemModel.swift */,
+				3F6D767B1E40F65F00FD8A73 /* LineupModel.swift */,
 				3F6D767C1E40F65F00FD8A73 /* VideoLineupItemModel.swift */,
 			);
 			name = Model;
@@ -366,10 +378,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F6D765A1E40F3CA00FD8A73 /* ViewController.swift in Sources */,
-				3F6D76831E40F9CB00FD8A73 /* LineupItemViewModel.swift in Sources */,
+				696BCB381E43AC8100D47DC9 /* LineupItemViewModel.swift in Sources */,
+				696BCB3B1E43AEC400D47DC9 /* LineupViewController.swift in Sources */,
+				7C88DB0F1E41074A00BFE1ED /* SearchCollectionViewCell.swift in Sources */,
 				3F6D767E1E40F65F00FD8A73 /* VideoLineupItemModel.swift in Sources */,
+				696BCB391E43AC8D00D47DC9 /* LineupCollectionViewDelegate.swift in Sources */,
 				3F6D76581E40F3CA00FD8A73 /* AppDelegate.swift in Sources */,
-				3F6D767D1E40F65F00FD8A73 /* LineupItemModel.swift in Sources */,
+				3F6D767D1E40F65F00FD8A73 /* LineupModel.swift in Sources */,
+				7C88DB131E4259BC00BFE1ED /* TopStoriesTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
