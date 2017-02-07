@@ -43,8 +43,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func prepareLayout(){
         self.segmentedControl.isHidden = true
         self.noResultsLabel.isHidden = true
+        self.view.bringSubview(toFront: self.progressIndicator)
         self.progressIndicator.isHidden = true
-        searchBar.barTintColor = UIColor.red
+        self.searchBar.barTintColor = UIColor.red
+        self.searchBar.placeholder = "Search"
         let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
         if statusBar.responds(to: #selector(setter: UIView.backgroundColor)) {
             statusBar.backgroundColor = UIColor.red
@@ -65,6 +67,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     //MARK: Parse Json
     func parseJSONTopStory(){
         self.topStoryArray = []
+        self.collectionView.isHidden = true
+        self.tableView.isHidden = true
+        self.noResultsLabel.isHidden = true
         self.progressIndicator.isHidden = false
         self.progressIndicator.startAnimating()
         let baseUrl = "https://api-gw-dev.radio-canada.ca/experimental-aggregate-content/v1/top-searches"
@@ -89,6 +94,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                     DispatchQueue.main.async(execute: {
                         self.progressIndicator.stopAnimating()
                         self.progressIndicator.isHidden = true
+                        self.tableView.isHidden = false
                         self.tableView.reloadData()
                     })
                 }
@@ -105,6 +111,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func parseJSON(){
         self.lineUpModelArray = []
+        self.collectionView.isHidden = true
+        self.tableView.isHidden = true
+        self.noResultsLabel.isHidden = true
         self.progressIndicator.isHidden = false
         self.progressIndicator.startAnimating()
         
@@ -171,17 +180,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                         }
                     }
                     DispatchQueue.main.async(execute: {
+                        self.progressIndicator.stopAnimating()
+                        self.progressIndicator.isHidden = true
+
                         if self.lineUpModelArray.count == 0 {
                             self.noResultsLabel.isHidden = false
                             self.collectionView.isHidden = true
                             self.segmentedControl.isHidden = true
-                            self.progressIndicator.isHidden = true 
                         } else {
                             self.noResultsLabel.isHidden = true
-                            self.progressIndicator.stopAnimating()
-                            self.progressIndicator.isHidden = true
+                            self.collectionView.isHidden = false
                             self.collectionView.reloadData()
-
                         }
                     })
                 }
@@ -253,10 +262,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         let cell = self.tableView.cellForRow(at: indexPath) as! TopStoriesTableViewCell!
         self.searchTerm = (cell?.topStoryLabel.text)!
+        self.searchBar.text = (cell?.topStoryLabel.text)!
         parseJSON()
         self.searchBar.endEditing(true)
         self.segmentedControl.isHidden = false
-        self.collectionView.isHidden = false
+        self.collectionView.isHidden = true
         self.tableView.isHidden = true
     }
     
@@ -268,7 +278,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         parseJSON()
         self.searchBar.endEditing(true)
         self.segmentedControl.isHidden = false
-        self.collectionView.isHidden = false
+        self.collectionView.isHidden = true
         self.tableView.isHidden = true
     }
     
